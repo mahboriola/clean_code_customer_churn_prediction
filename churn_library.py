@@ -68,6 +68,16 @@ def perform_eda(df):
     sns.heatmap(df.corr(), annot=False, cmap='Dark2_r', linewidths = 2)
     plt.tight_layout()
     plt.savefig('./images/eda/features_correlation.png')
+
+    plt.figure(figsize=(20,10))
+    sns.boxplot(x='Customer_Age', y='Avg_Utilization_Ratio', data=df)
+    plt.tight_layout()
+    plt.savefig('./images/eda/age_utilization_boxplot.png')
+
+    plt.figure(figsize=(20,10))
+    sns.barplot(x='Income_Category', y='Avg_Utilization_Ratio', data=df)
+    plt.tight_layout()
+    plt.savefig('./images/eda/income_utilization_bar.png')
     
 
 def encoder_helper(df, category_lst, response=None):
