@@ -149,23 +149,17 @@ def classification_report_image(y_train,
     output:
              None
     '''
-    plt.figure(figsize=(5, 5))
-    plt.text(0.01, 1.25, str('Random Forest Train'), {'fontsize': 10}, fontproperties = 'monospace')
-    plt.text(0.01, 0.05, str(classification_report(y_test, y_test_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
-    plt.text(0.01, 0.6, str('Random Forest Test'), {'fontsize': 10}, fontproperties = 'monospace')
-    plt.text(0.01, 0.7, str(classification_report(y_train, y_train_preds_rf)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
-    plt.axis('off');
-    plt.tight_layout()
-    plt.savefig('./images/results/rf_classification_report.png')
-
-    plt.figure(figsize=(5, 5))
-    plt.text(0.01, 1.25, str('Logistic Regression Train'), {'fontsize': 10}, fontproperties = 'monospace')
-    plt.text(0.01, 0.05, str(classification_report(y_train, y_train_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
-    plt.text(0.01, 0.6, str('Logistic Regression Test'), {'fontsize': 10}, fontproperties = 'monospace')
-    plt.text(0.01, 0.7, str(classification_report(y_test, y_test_preds_lr)), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
-    plt.axis('off');
-    plt.tight_layout()
-    plt.savefig('./images/results/lr_classification_report.png')
+    classifiers = [{'name': 'Logistic Regression', 'train_preds': y_train_preds_lr, 'test_preds': y_test_preds_lr},
+                   {'name': 'Random Forest', 'train_preds': y_train_preds_rf, 'test_preds': y_test_preds_rf}]
+    for classifier in classifiers:
+        plt.figure(figsize=(5, 5))
+        plt.text(0.01, 1.25, str(f'{classifier["name"]} Train'), {'fontsize': 10}, fontproperties = 'monospace')
+        plt.text(0.01, 0.05, str(classification_report(y_test, classifier['test_preds'])), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+        plt.text(0.01, 0.6, str(f'{classifier["name"]} Test'), {'fontsize': 10}, fontproperties = 'monospace')
+        plt.text(0.01, 0.7, str(classification_report(y_train, classifier['train_preds'])), {'fontsize': 10}, fontproperties = 'monospace') # approach improved by OP -> monospace!
+        plt.axis('off');
+        plt.tight_layout()
+        plt.savefig(f'./images/results/{classifier["name"].lower().replace(" ", "_")}_classification_report.png')
 
 
 def feature_importance_plot(model, X_data, output_pth):
