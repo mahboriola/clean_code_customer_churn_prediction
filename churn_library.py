@@ -241,6 +241,17 @@ def train_models(X_train, X_test, y_train, y_test):
     classification_report_image(y_train, y_test, y_train_preds_lr, y_train_preds_rf, y_test_preds_lr, y_test_preds_rf)
     feature_importance_plot(cv_rfc.best_estimator_, X_train, './images/results/rf_feature_importance.png')
 
+    # plot roc curves
+    lrc_plot = plot_roc_curve(lrc, X_test, y_test)
+    plt.savefig('./images/results/lr_roc_curve.png')
+
+    plt.figure(figsize=(15, 8))
+    ax = plt.gca()
+    rfc_disp = plot_roc_curve(cv_rfc.best_estimator_, X_test, y_test, ax=ax, alpha=0.8)
+    plt.savefig('./images/results/rf_roc_curve.png')
+    lrc_plot.plot(ax=ax, alpha=0.8)
+    plt.savefig('./images/results/rf_lr_roc_curve.png')
+
     # save best model
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
     joblib.dump(lrc, './models/logistic_model.pkl')
