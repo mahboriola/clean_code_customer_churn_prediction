@@ -1,7 +1,12 @@
-# library doc string
+"""
+This module cointains functions to train and 
+test models for churn prediction, besides it generates
+classification report and feature importance plots.
 
+Author: Marcos Aurélio Hermogenes Boriola
+Date: August 10, 2022
+"""
 
-# import libraries
 import shap
 import joblib
 import pandas as pd
@@ -193,7 +198,7 @@ def feature_importance_plot(model, X_data, output_pth):
 
     # Create plot
     plt.figure(figsize=(20, 5))
-
+    
     # Create plot title
     plt.title("Feature Importance")
     plt.ylabel('Importance')
