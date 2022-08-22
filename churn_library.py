@@ -256,6 +256,13 @@ def train_models(X_train, X_test, y_train, y_test):
     lrc_plot.plot(ax=ax, alpha=0.8)
     plt.savefig('./images/results/rf_lr_roc_curve.png')
 
+    plt.clf()
+    explainer = shap.TreeExplainer(cv_rfc.best_estimator_)
+    shap_values = explainer.shap_values(X_test)
+    shap.summary_plot(shap_values, X_test, plot_type="bar", show=False)
+    plt.tight_layout()
+    plt.savefig('./images/results/rf_shap_values.png')
+    
     # save best model
     joblib.dump(cv_rfc.best_estimator_, './models/rfc_model.pkl')
     joblib.dump(lrc, './models/logistic_model.pkl')
