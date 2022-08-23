@@ -58,8 +58,8 @@ def perform_eda(df):
     plt.tight_layout()
     plt.savefig('./images/eda/age_hist.png')
 
-    plt.figure(figsize=(20,10)) 
-    plt.hist(df['Marital_Status'].value_counts('normalize'))
+    plt.figure(figsize=(20,10))
+    df['Marital_Status'].value_counts('normalize').plot(kind='bar')
     plt.tight_layout()
     plt.savefig('./images/eda/marital_hist.png')
 
