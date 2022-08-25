@@ -49,16 +49,23 @@ def perform_eda(df):
     '''
     plt.figure(figsize=(20, 10))
     plt.hist(df['Churn'])
+    plt.axes().set_xlabel('Churn')
+    plt.axes().set_ylabel('Num. of clients')
     plt.tight_layout()
     plt.savefig('./images/eda/churn_hist.png')
 
     plt.figure(figsize=(20, 10))
     plt.hist(df['Customer_Age'])
+    plt.axes().set_xlabel('Client age')
+    plt.axes().set_ylabel('Num. of clients')
     plt.tight_layout()
     plt.savefig('./images/eda/age_hist.png')
 
     plt.figure(figsize=(20, 10))
     df['Marital_Status'].value_counts('normalize').plot(kind='bar')
+    plt.axes().set_xlabel('Marital status')
+    plt.axes().set_ylabel('Num. of clients (%)')
+    plt.axes().set_yticklabels([0, 10, 20, 30, 40, 50])
     plt.tight_layout()
     plt.savefig('./images/eda/marital_hist.png')
 
@@ -314,5 +321,5 @@ if __name__ == '__main__':
     df_['Churn'] = df_['Attrition_Flag'].apply(
         lambda val: 0 if val == "Existing Customer" else 1)
     perform_eda(df_)
-    dataset  = perform_feature_engineering(df_, 'Churn')
-    train_models(*dataset)
+    # dataset  = perform_feature_engineering(df_, 'Churn')
+    # train_models(*dataset)
