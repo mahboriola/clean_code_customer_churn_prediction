@@ -55,3 +55,5 @@ ipython churn_script_logging_and_tests.py
 ```
 
 After running the above commands, you can check for their outputs in the folders mentioneds in the previous section.
+
+In the `master` branch you can find the output files in their respective folders and some others files available for this project, but if you want to run in a clean setup just checkout to the `clean` branch.
